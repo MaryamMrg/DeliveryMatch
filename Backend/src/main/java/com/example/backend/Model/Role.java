@@ -2,5 +2,5 @@ package com.example.backend.Model;
 
 public enum Role {
 
-    Admin, Driver,Sender
+    DRIVER, ADMIN, SENDER
 }
