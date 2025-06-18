@@ -5,11 +5,17 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class AuthRequest {
     private String email;
     private String password;
+
+    public AuthRequest(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public AuthRequest() {
+    }
 
     public String getEmail() {
         return email;

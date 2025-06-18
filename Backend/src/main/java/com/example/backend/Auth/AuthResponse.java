@@ -2,10 +2,8 @@ package com.example.backend.Auth;
 
 import lombok.*;
 
-@AllArgsConstructor
-@Getter
-@Setter
-@Builder
+
+
 public class AuthResponse {
 
     private String token;
@@ -19,5 +17,9 @@ public class AuthResponse {
     }
 
     public AuthResponse() {
+    }
+
+    public AuthResponse(String token) {
+        this.token = token;
     }
 }

@@ -3,16 +3,23 @@ package com.example.backend.Auth;
 import com.example.backend.Model.Role;
 import lombok.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+
 @Builder
 public class RegisterRequest {
     private String name;
     private String email;
     private String password;
     private Role role;
+
+    public RegisterRequest() {
+    }
+
+    public RegisterRequest(String name, String email, String password, Role role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 
     public Role getRole() {
         return role;

@@ -15,7 +15,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 @Component
-//OncePerRequestFilter katkhdam fkola request daro luser
+//OncePerRequestFilter works on every request the user pass
+
 public class JwtAuthFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
@@ -30,7 +31,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         @NonNull HttpServletRequest request,
         @NonNull HttpServletResponse response,
         @NonNull FilterChain filterChain) throws ServletException, IOException {
-
+        String requestPath = request.getRequestURI();
+        if (requestPath.startsWith("/api/v1/auth/")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
             final String authHeader = request.getHeader("Authorization");
             final String jwt;
             final String userEmail;
@@ -42,13 +47,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
             jwt = authHeader.substring(7);
             userEmail = jwtService.extractUserName(jwt);
-            //ila kan 3ndna userEmail o had luser machi authenticated
+
             if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null){
-                // kanakhdo user mn database
+
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
-                //kantchikiw wach user valid ola la
+
                 if (jwtService.isTokenValid(jwt, userDetails)){
-                    //ila kan valid kandiro update authentication token
+
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                             userDetails,
                             null,
