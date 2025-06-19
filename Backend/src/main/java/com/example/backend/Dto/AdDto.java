@@ -11,16 +11,22 @@ public class AdDto {
     private Long capacity;
 
 
-    public AdDto(String start, String destination, Date date, String m_type, Long capacity) {
+    public AdDto(String start, String destination, Date date, String m_type, Long capacity ) {
         Start = start;
         this.destination = destination;
         this.date = date;
         M_type = m_type;
         this.capacity = capacity;
+
+
     }
+
+
 
     public AdDto() {
     }
+
+
 
     public String getStart() {
         return Start;

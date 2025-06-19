@@ -55,6 +55,7 @@ public class Package {
     public void setWeight(Double weight) {
         this.weight = weight;
     }
+
     @OneToOne
     private Request request;
 }

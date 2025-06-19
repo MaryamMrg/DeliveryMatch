@@ -1,9 +1,12 @@
 package com.example.backend.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Ad {
@@ -17,17 +20,34 @@ public class Ad {
     private String M_type;
     private Long capacity;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Driver driver;
+
     public Ad() {
     }
 
-    public Ad(Long ad_id, String start, String destination, Date date, String m_type, Long capacity) {
+    public Ad(Long ad_id, String start, String destination, Date date, String m_type, Long capacity,Driver driver) {
         Ad_id = ad_id;
         Start = start;
         this.destination = destination;
         this.date = date;
         M_type = m_type;
         this.capacity = capacity;
+      this.driver = driver;
+
+
     }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
+
 
     public Long getAd_id() {
         return Ad_id;
@@ -77,6 +97,8 @@ public class Ad {
         this.capacity = capacity;
     }
 
-    @ManyToOne
-    private Request request;
+    @OneToMany
+    private List<Request> requests = new ArrayList<Request>();
+
+
 }

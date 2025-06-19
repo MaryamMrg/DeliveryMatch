@@ -15,6 +15,7 @@ public class Request {
     private Long sender_id;
     private Long Ad_id;
 
+
     private Status status;
 
  public Request(Long r_id, Long sender_id, Long ad_id, Status status, Package pack) {
@@ -71,6 +72,9 @@ public class Request {
  @OneToOne
  private Package pack;
 
- @OneToMany
- private List<Ad> ad;
+ @ManyToOne
+ private Ad ad;
+
+ @ManyToOne
+ private Sender sender;
 }
