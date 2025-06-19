@@ -76,4 +76,7 @@ public class Ad {
     public void setCapacity(Long capacity) {
         this.capacity = capacity;
     }
+
+    @ManyToOne
+    private Request request;
 }

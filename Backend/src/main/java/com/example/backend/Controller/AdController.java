@@ -30,7 +30,7 @@ public class AdController {
     }
 
     @DeleteMapping
-    public void deleteAd(@RequestBody Long id) {
+    public void deleteAd(@PathVariable Long id) {
          adService.deleteAd(id);
     }
 }

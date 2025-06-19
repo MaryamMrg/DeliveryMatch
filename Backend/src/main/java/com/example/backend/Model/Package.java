@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 public class Package {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long P_id;
+
     private String type;
     private String dimension;
     private Double weight;
