@@ -1,0 +1,76 @@
+<div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light">
+  <div class="row w-100 justify-content-center">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+      <mat-card class="shadow">
+        <mat-card-header class="text-center pb-3">
+          <mat-card-title>
+            <h3 class="mb-0">Login</h3>
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <!-- Error Message -->
+          <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+            <small>{{ errorMessage }}</small>
+          </div>
+
+          <!-- Success Message -->
+          <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+            <small>{{ successMessage }}</small>
+          </div>
+
+          <form [formGroup]="loginForm" (ngSubmit)="onSumbit()">
+            <!-- Email Field -->
+            <mat-form-field appearance="outline" class="w-100 mb-3">
+              <mat-label>Email</mat-label>
+              <input matInput 
+                     type="email" 
+                     formControlName="email" 
+                     placeholder="Enter your email"
+                     [disabled]="loading">
+              <mat-icon matSuffix>email</mat-icon>
+              <mat-error *ngIf="email?.hasError('required')">
+                Email is required
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Password Field -->
+            <mat-form-field appearance="outline" class="w-100 mb-4">
+              <mat-label>Password</mat-label>
+              <input matInput 
+                     type="password" 
+                     formControlName="password" 
+                     placeholder="Enter your password"
+                     [disabled]="loading">
+              <mat-icon matSuffix>lock</mat-icon>
+              <mat-error *ngIf="password?.hasError('required')">
+                Password is required
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Login Button -->
+            <button mat-raised-button 
+                    color="primary" 
+                    type="submit" 
+                    class="w-100 mb-3"
+                    [disabled]="loginForm.invalid || loading">
+              <span *ngIf="!loading">Login</span>
+              <span *ngIf="loading" class="d-flex align-items-center justify-content-center">
+                <mat-spinner diameter="20" class="me-2"></mat-spinner>
+                Logging in...
+              </span>
+            </button>
+
+            <!-- Register Link -->
+            <div class="text-center">
+              <small class="text-muted">
+                Don't have an account? 
+                <a href="#" class="text-primary text-decoration-none">Register here</a>
+              </small>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
