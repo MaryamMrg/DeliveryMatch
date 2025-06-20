@@ -21,7 +21,7 @@ public class Ad {
     private Long capacity;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "driver_id")
     private Driver driver;
 
     public Ad() {
@@ -104,7 +104,7 @@ public class Ad {
         this.capacity = capacity;
     }
 
-    @OneToMany(mappedBy = "ad")
+    @OneToMany
     private List<Request> requests = new ArrayList<Request>();
 
 

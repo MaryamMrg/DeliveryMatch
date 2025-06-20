@@ -8,6 +8,6 @@ import java.util.List;
 @Entity
 public class Sender extends User{
 
-    @OneToMany(mappedBy = "sender")
+    @OneToMany(mappedBy = "sender" )
     private List<Request> requests;
 }

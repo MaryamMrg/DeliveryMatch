@@ -16,8 +16,7 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Getter
-@Setter
+
 
 public class User  implements UserDetails{
     @Id

@@ -12,9 +12,6 @@ public class Request {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long r_id;
-
-
-
     private Status status;
 
  public Request(Long r_id,  Status status, Package pack) {
@@ -80,8 +77,5 @@ public class Request {
  private Ad ad;
 
  @ManyToOne
- @JoinColumn(name = "user_id"  )
  private Sender sender;
-
-
 }
