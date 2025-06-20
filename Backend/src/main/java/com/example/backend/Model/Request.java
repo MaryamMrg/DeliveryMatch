@@ -12,16 +12,15 @@ public class Request {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long r_id;
-    private Long sender_id;
-    private Long Ad_id;
+
 
 
     private Status status;
 
- public Request(Long r_id, Long sender_id, Long ad_id, Status status, Package pack) {
+ public Request(Long r_id,  Status status, Package pack) {
   this.r_id = r_id;
-  this.sender_id = sender_id;
-  Ad_id = ad_id;
+
+
   this.status = status;
   this.pack = pack;
  }
@@ -37,21 +36,9 @@ public class Request {
   this.r_id = r_id;
  }
 
- public Long getSender_id() {
-  return sender_id;
- }
 
- public void setSender_id(Long sender_id) {
-  this.sender_id = sender_id;
- }
 
- public Long getAd_id() {
-  return Ad_id;
- }
 
- public void setAd_id(Long ad_id) {
-  Ad_id = ad_id;
- }
 
  public Status getStatus() {
   return status;
@@ -69,12 +56,32 @@ public class Request {
   this.pack = pack;
  }
 
+ public Ad getAd() {
+  return ad;
+ }
+
+ public void setAd(Ad ad) {
+  this.ad = ad;
+ }
+
+ public Sender getSender() {
+  return sender;
+ }
+
+ public void setSender(Sender sender) {
+  this.sender = sender;
+ }
+
  @OneToOne
  private Package pack;
 
  @ManyToOne
+ @JoinColumn(name = "ad_id")
  private Ad ad;
 
  @ManyToOne
+ @JoinColumn(name = "user_id"  )
  private Sender sender;
+
+
 }

@@ -4,19 +4,28 @@ import com.example.backend.Model.Status;
 
 public class RequestDto {
     private Long r_id;
-    private Long sender_id;
     private Long Ad_id;
 
     private Status status;
+    private Long driverUserId;
 
-    public RequestDto(Long r_id, Long sender_id, Long ad_id, Status status) {
+    public RequestDto(Long r_id, Long ad_id, Status status, Long driverUserId) {
         this.r_id = r_id;
-        this.sender_id = sender_id;
         Ad_id = ad_id;
         this.status = status;
+        this.driverUserId = driverUserId;
     }
 
+
     public RequestDto() {
+    }
+
+    public Long getDriverUserId() {
+        return driverUserId;
+    }
+
+    public void setDriverUserId(Long driverUserId) {
+        this.driverUserId = driverUserId;
     }
 
     public Long getR_id() {
@@ -27,13 +36,6 @@ public class RequestDto {
         this.r_id = r_id;
     }
 
-    public Long getSender_id() {
-        return sender_id;
-    }
-
-    public void setSender_id(Long sender_id) {
-        this.sender_id = sender_id;
-    }
 
     public Long getAd_id() {
         return Ad_id;

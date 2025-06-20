@@ -22,7 +22,8 @@ import java.util.List;
 public class User  implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    private Long userId;
+
     private String name;
     private String email;
     private String password;
@@ -33,12 +34,12 @@ public class User  implements UserDetails{
     public User() {
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -73,8 +74,8 @@ public class User  implements UserDetails{
         this.role = role;
     }
 
-    public User(Long user_id, String name, String email, String password, Role role) {
-        this.user_id = user_id;
+    public User(Long userId, String name, String email, String password, Role role) {
+        this.userId = userId;
         this.name = name;
         this.email = email;
         this.password = password;

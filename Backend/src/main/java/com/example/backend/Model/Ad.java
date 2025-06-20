@@ -12,7 +12,7 @@ import java.util.List;
 public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Ad_id;
+    private Long adId;
 
     private String Start;
     private String destination;
@@ -27,8 +27,8 @@ public class Ad {
     public Ad() {
     }
 
-    public Ad(Long ad_id, String start, String destination, Date date, String m_type, Long capacity,Driver driver) {
-        Ad_id = ad_id;
+    public Ad(Long adId, String start, String destination, Date date, String m_type, Long capacity,Driver driver) {
+        adId = adId;
         Start = start;
         this.destination = destination;
         this.date = date;
@@ -48,13 +48,20 @@ public class Ad {
     }
 
 
-
-    public Long getAd_id() {
-        return Ad_id;
+    public Long getAdId() {
+        return adId;
     }
 
-    public void setAd_id(Long ad_id) {
-        Ad_id = ad_id;
+    public void setAdId(Long adId) {
+        this.adId = adId;
+    }
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
     }
 
     public String getStart() {
@@ -97,7 +104,7 @@ public class Ad {
         this.capacity = capacity;
     }
 
-    @OneToMany
+    @OneToMany(mappedBy = "ad")
     private List<Request> requests = new ArrayList<Request>();
 
 
