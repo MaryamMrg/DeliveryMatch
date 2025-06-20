@@ -32,10 +32,10 @@ export class AuthService {
 
 
   login(credentials:{email:string, password:string }):Observable<LoginResponse>{
-    return this.http.post<LoginResponse>(`${this.apiUrl}/api/v1/authenticate`,credentials)
+    return this.http.post<LoginResponse>(`${this.apiUrl}/api/v1/auth/authenticate`,credentials)
   }
 
   register(userdata : RegisterRequest):Observable<any>{
- return this.http.post(`${this.apiUrl}/api/v1/register`,userdata);
+ return this.http.post(`${this.apiUrl}/api/v1/auth/register`,userdata);
   }
 }

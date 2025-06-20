@@ -1,0 +1,97 @@
+<div class="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light">
+  <div class="row w-100 justify-content-center">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+      <mat-card class="shadow">
+        <mat-card-header class="text-center pb-3">
+          <mat-card-title>
+            <h3 class="mb-0">Sign Up</h3>
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <!-- Success Message -->
+          <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+            <small>{{ successMessage }}</small>
+          </div>
+
+          <!-- Error Message -->
+          <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+            <small>{{ errorMessage }}</small>
+          </div>
+
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <!-- Name Field -->
+            <mat-form-field appearance="outline" class="w-100 mb-3">
+              <mat-label>Full Name</mat-label>
+              <input matInput 
+                     type="text" 
+                     formControlName="name" 
+                     placeholder="Enter your full name"
+                    >
+              <mat-icon matSuffix>person</mat-icon>
+              <mat-error *ngIf="registerForm.get('name')?.hasError('required')">
+                Name is required
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Email Field -->
+            <mat-form-field appearance="outline" class="w-100 mb-3">
+              <mat-label>Email</mat-label>
+              <input matInput 
+                     type="email" 
+                     formControlName="email" 
+                     placeholder="Enter your email"
+                     >
+              <mat-icon matSuffix>email</mat-icon>
+              <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
+                Email is required
+              </mat-error>
+              <mat-error *ngIf="registerForm.get('email')?.hasError('email')">
+                Please enter a valid email
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Password Field -->
+            <mat-form-field appearance="outline" class="w-100 mb-3">
+              <mat-label>Password</mat-label>
+              <input matInput 
+                     type="password" 
+                     formControlName="password" 
+                     placeholder="Enter your password"
+                     [disabled]="loading">
+              <mat-icon matSuffix>lock</mat-icon>
+              <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
+                Password is required
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Role Field (Hidden - defaults to USER) -->
+ <label for="role">role</label>
+                 <select id="role" formControlName="role" class="form-control">
+                  <option value="">select a role</option>
+                  <option value="DRIVER">DRIVER</option>
+                  <option value="ADMIN">ADMIN</option>
+                  <option value="SENDER">SENDER</option>
+                 </select>
+            <!-- Sign Up Button -->
+            <button mat-raised-button 
+                    color="primary" 
+                    type="submit" 
+                    class="w-100 mb-3"
+                    >
+             Signup
+            </button>
+
+            <!-- Login Link -->
+            <div class="text-center">
+              <small class="text-muted">
+                Already have an account? 
+                <a routerLink="/login" class="text-primary text-decoration-none">Login here</a>
+              </small>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
