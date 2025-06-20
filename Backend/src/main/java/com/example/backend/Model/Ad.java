@@ -21,7 +21,7 @@ public class Ad {
     private Long capacity;
 
     @ManyToOne
-    @JoinColumn(name = "driver_id")
+    @JoinColumn(name = "user_id")
     private Driver driver;
 
     public Ad() {

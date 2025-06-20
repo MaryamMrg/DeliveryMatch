@@ -24,12 +24,12 @@ public class AdController {
     public List<AdDto> getAllAds() {
         return adService.getAllAds();
     }
-    @PutMapping
-    public AdDto updateAd(@RequestBody AdDto updateto) {
-        return adService.updateAd(updateto);
+    @PutMapping("/update/{id}")
+    public AdDto updateAd(@RequestBody AdDto updateDto,@PathVariable Long id) {
+        return adService.updateAd(updateDto,id);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteAd(@PathVariable Long id) {
          adService.deleteAd(id);
     }

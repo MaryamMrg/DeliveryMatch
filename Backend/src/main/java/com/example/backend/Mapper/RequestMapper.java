@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface RequestMapper {
 
-    
+
     @Mapping(source = "ad.adId", target = "ad_id")
     @Mapping(source = "sender.userId", target = "sender_id")
     @Mapping(source = "pack.p_id", target = "packId")

@@ -46,10 +46,15 @@ public class AdService {
         return adMapper.toDto(ad);
     }
 
-    public AdDto updateAd(AdDto adDto) {
-        Ad ad = adMapper.toEntity(adDto);
-        Ad savedAd = adRepository.save(ad);
-        return adMapper.toDto(savedAd);
+    public AdDto updateAd(AdDto adDto, Long id) {
+       Ad ad = adRepository.findById(id).orElseThrow(()-> new RuntimeException("not found"));
+       ad.setStart(adDto.getStart());
+       ad.setDestination(adDto.getDestination());
+       ad.setDate(adDto.getDate());
+       ad.setCapacity(adDto.getCapacity());
+       ad.setM_type(adDto.getM_type());
+       Ad savedAd = adRepository.save(ad);
+       return adMapper.toDto(savedAd);
     }
     public void deleteAd(Long id) {
         adRepository.deleteById(id);

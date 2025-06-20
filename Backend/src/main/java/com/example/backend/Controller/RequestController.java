@@ -26,9 +26,9 @@ public class RequestController {
     @DeleteMapping("/{id}")
     public void deleteRequest(@PathVariable Long id) {requestService.deleteRequest(id);}
 
-    @PutMapping
-    public RequestDto updateRequest(@RequestBody RequestDto requestDto) {
-        return requestService.updateRequest(requestDto);
+    @PutMapping("/{id}")
+    public RequestDto updateRequest(@RequestBody RequestDto requestDto , @PathVariable Long id) {
+        return requestService.updateRequest(requestDto, id);
     }
 
 }

@@ -89,18 +89,16 @@ public class RequestService {
         return requestMapper.toDtos(requests);
     }
 
-    public RequestDto updateRequest(RequestDto requestDto) {
-        Request request = requestMapper.toEntity(requestDto);
+    public RequestDto updateRequest(RequestDto requestDto,Long id) {
 
-        if (requestDto.getAd_id() != null) {
-            Ad ad = adRepository.findById(requestDto.getAd_id()).orElse(null);
-            if (ad != null) {
-                request.setAd(ad);
-            }
-        }
+        Request request = requestRepository.findById(id).orElseThrow(()->new RuntimeException("Request not found"));
+        request.setStatus(requestDto.getStatus());
 
-        Request savedRequest = requestRepository.save(request);
-        return requestMapper.toDto(savedRequest);
+        request.setSender(request.getSender());
+       request.setAd(request.getAd());
+       request.setPack(request.getPack());
+       Request savedRequest = requestRepository.save(request);
+       return requestMapper.toDto(savedRequest);
     }
 
     public void deleteRequest(Long id) {
