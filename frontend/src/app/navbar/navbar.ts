@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   imports: [ CommonModule,
@@ -28,13 +29,19 @@ import { MatDividerModule } from '@angular/material/divider';
   styleUrl: './navbar.css'
 })
 export class Navbar {
-isMenuOpen = false;
+constructor(private router :Router){
+  
+}
 
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
+goToLogin(){
+this.router.navigate(['/login']);
+}
 
-  onMenuItemClick() {
-    this.isMenuOpen = false;
-  }
+
+
+goToRegister(){
+  this.router.navigate(['/signup'])
+}
+
+
 }
