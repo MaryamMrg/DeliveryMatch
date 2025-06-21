@@ -38,4 +38,21 @@ export class AuthService {
   register(userdata : RegisterRequest):Observable<any>{
  return this.http.post(`${this.apiUrl}/api/v1/auth/register`,userdata);
   }
+
+  getToken():string | null{
+   return localStorage.getItem('token');
+
+  }
+
+  getRole() : string | null{
+    return localStorage.getItem('role');
+  }
+
+ 
+    saveToken(token: string): void {
+    localStorage.setItem('token', token);
+  }
+  saveRole(role: string): void {
+    localStorage.setItem('role', role);
+  }
 }

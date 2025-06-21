@@ -62,8 +62,8 @@ onSumbit():void{
         next: (response) => {
           localStorage.setItem('token', response.token);
           localStorage.setItem('role', response.role);
-
-          //rediriger l'utilisateur selon leur role
+console.log('saved token : ', response.token);
+console.log('user role is:', response.role);
           if(response.role === 'ADMIN'){
             alert("welcome admin")
             // this.router.navigate(['/admin-dashboard']);
@@ -72,6 +72,7 @@ onSumbit():void{
             alert("welcome SENDER")
             //this.router.navigate(['user-dashboard']);
           }
+          console.log('saved user is', response.user)
         },
         error: (err)=>{
           this.errorMessage = typeof err === 'string' ? err : 'Login failed';
