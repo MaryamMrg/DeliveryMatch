@@ -1,0 +1,245 @@
+/* Container and Background */
+.container-fluid {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+/* Card Styling */
+mat-card {
+  border-radius: 16px !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+  border: none;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Card Header */
+mat-card-header {
+  padding: 2rem 2rem 1rem 2rem !important;
+  background: transparent;
+}
+
+mat-card-title h3 {
+  color: #333;
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Content */
+mat-card-content {
+  padding: 0 2rem 2rem 2rem !important;
+}
+
+/* Form Fields */
+mat-form-field {
+  margin-bottom: 1rem !important;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+/* Input Fields */
+.mat-mdc-input-element {
+  color: #333 !important;
+  font-size: 14px;
+}
+
+.mat-mdc-form-field-outline {
+  color: #ddd !important;
+}
+
+.mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important;
+}
+
+/* Labels */
+.mat-mdc-floating-label {
+  color: #666 !important;
+  font-weight: 500;
+}
+
+/* Icons */
+.mat-icon {
+  color: #667eea !important;
+}
+
+/* Custom Select Styling */
+.role-field {
+  margin-bottom: 1.5rem;
+}
+
+.role-field label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+}
+
+.role-field select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #333;
+  transition: all 0.3s ease;
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.role-field select:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.role-field select:hover {
+  border-color: #999;
+}
+
+/* Button Styling */
+.mat-mdc-raised-button.mat-primary {
+  background-color: #667eea !important;
+  color: white !important;
+  border-radius: 10px !important;
+  padding: 12px 24px !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+  transition: all 0.3s ease !important;
+  border: none !important;
+  text-transform: none !important;
+}
+
+.mat-mdc-raised-button.mat-primary:hover {
+  background-color: #5a67d8 !important;
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+.mat-mdc-raised-button.mat-primary:disabled {
+  background-color: #ccc !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Alert Messages */
+.alert {
+  border-radius: 8px !important;
+  border: none !important;
+  font-weight: 500;
+  padding: 12px 16px;
+}
+
+.alert-success {
+  background-color: #d4edda !important;
+  color: #155724 !important;
+  border-left: 4px solid #28a745 !important;
+}
+
+.alert-danger {
+  background-color: #f8d7da !important;
+  color: #721c24 !important;
+  border-left: 4px solid #dc3545 !important;
+}
+
+/* Login Link */
+.text-center small {
+  font-size: 13px;
+}
+
+.text-center a {
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.text-center a:hover {
+  color: #5a67d8 !important;
+  text-decoration: underline !important;
+}
+
+/* Error Messages */
+.mat-mdc-form-field-error {
+  color: #dc3545 !important;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+  .container-fluid {
+    padding: 1rem;
+  }
+  
+  mat-card {
+    margin: 0;
+  }
+  
+  mat-card-header {
+    padding: 1.5rem 1.5rem 1rem 1.5rem !important;
+  }
+  
+  mat-card-content {
+    padding: 0 1.5rem 1.5rem 1.5rem !important;
+  }
+  
+  mat-card-title h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Animation */
+mat-card {
+  animation: slideIn 0.6s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Focus states for better accessibility */
+mat-form-field:focus-within {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
+}
+
+/* Loading state styling */
+.mat-mdc-progress-spinner {
+  margin-right: 8px;
+}
+
+/* Custom scrollbar for select dropdown */
+.role-field select::-webkit-scrollbar {
+  width: 6px;
+}
+
+.role-field select::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.role-field select::-webkit-scrollbar-thumb {
+  background: #667eea;
+  border-radius: 3px;
+}
+
+.role-field select::-webkit-scrollbar-thumb:hover {
+  background: #5a67d8;
+}

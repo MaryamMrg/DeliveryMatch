@@ -64,11 +64,12 @@ onSumbit():void{
           localStorage.setItem('role', response.role);
 
           //rediriger l'utilisateur selon leur role
-          if(response.role === 'Admin'){
+          if(response.role === 'ADMIN'){
             alert("welcome admin")
             // this.router.navigate(['/admin-dashboard']);
+          }if(response.role==="DRIVER"){
           }else {
-            alert("welcome client")
+            alert("welcome SENDER")
             //this.router.navigate(['user-dashboard']);
           }
         },
