@@ -68,7 +68,8 @@ ngOnInit(): void {
   date: new Date(this.adForm.value.date || new Date()),
   m_type: this.adForm.value.m_type || null,
   capacity: this.adForm.value.capacity || 0,
-  start: this.adForm.value.Start || null  // H
+  start: this.adForm.value.start || null  // H
+  
       };
 
       this.adService.createAd(adData).subscribe({

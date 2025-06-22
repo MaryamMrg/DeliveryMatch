@@ -14,7 +14,7 @@ public class Ad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long adId;
 
-    private String Start;
+    private String start;
     private String destination;
     private Date date;
     private String M_type;
@@ -29,7 +29,7 @@ public class Ad {
 
     public Ad(Long adId, String start, String destination, Date date, String m_type, Long capacity,Driver driver) {
         this.adId = adId;
-        Start = start;
+        this.start = start;
         this.destination = destination;
         this.date = date;
         M_type = m_type;
@@ -65,11 +65,11 @@ public class Ad {
     }
 
     public String getStart() {
-        return Start;
+        return start;
     }
 
     public void setStart(String start) {
-        Start = start;
+        this.start = start;
     }
 
     public String getDestination() {
