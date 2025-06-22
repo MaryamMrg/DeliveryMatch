@@ -64,10 +64,12 @@ onSumbit():void{
           localStorage.setItem('role', response.role);
 console.log('saved token : ', response.token);
 console.log('user role is:', response.role);
-          if(response.role === 'ADMIN'){
-            alert("welcome admin")
+
+          if(response.role === "ADMIN"){
+            alert("welcome ADMIN")
             // this.router.navigate(['/admin-dashboard']);
-          }if(response.role==="DRIVER"){
+          }else if(response.role==="DRIVER"){
+            alert("welcome DRIVER")
           }else {
             alert("welcome SENDER")
             //this.router.navigate(['user-dashboard']);
