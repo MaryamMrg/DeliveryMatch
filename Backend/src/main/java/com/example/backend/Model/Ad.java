@@ -28,7 +28,7 @@ public class Ad {
     }
 
     public Ad(Long adId, String start, String destination, Date date, String m_type, Long capacity,Driver driver) {
-        adId = adId;
+        this.adId = adId;
         Start = start;
         this.destination = destination;
         this.date = date;

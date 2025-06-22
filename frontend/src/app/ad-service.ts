@@ -4,10 +4,12 @@ import { Observable } from 'rxjs';
 
 
 export interface Ad{
-  id?:number;
+  adId?:number;
+  start:string;
   destination : string;
   date: Date;
   m_type:string;
+  
   capacity: number
 }
 
@@ -44,7 +46,7 @@ return this.http.post<Ad>(this.apiUrl,ad,{headers:this.getAuthHeader()});
     return this.http.delete(`${this.apiUrl}/${id}`,{headers:this.getAuthHeader()})
 
   }
-  getAdById():Observable<any>{
-return this.http.get<any>(`${this.apiUrl}/`)
+  getAdById(id:number):Observable<any>{
+return this.http.get<any>(`${this.apiUrl}/AdByID/${id}`,{headers:this.getAuthHeader()})
   }
 }

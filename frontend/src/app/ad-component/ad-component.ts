@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-ad-component',
   imports: [CommonModule ,MatButtonModule,MatCardModule,MatIconModule,MatProgressSpinnerModule],
@@ -21,7 +22,7 @@ export class AdComponent implements OnInit{
   ads:Ad[]=[]
   ad! : Ad;
 
-  constructor(private adservice:AdService){}
+  constructor(private adservice:AdService,private router:Router){}
 
   ngOnInit(): void {
     this.loadAds();
@@ -35,6 +36,7 @@ export class AdComponent implements OnInit{
     this.adservice.getAllAds().subscribe({
       next : (ads)=>{
         console.log('ads recieved : ',ads);
+        
         this.ads=ads;
         this.loading=false;
       },
@@ -44,4 +46,37 @@ export class AdComponent implements OnInit{
       }
     })
   }
+
+ navigateToUpdate(adId: number | undefined): void {
+  if (adId !== undefined && adId !== null) {
+    this.router.navigate(['/ads/update', adId]);
+  } else {
+    console.error('Ad ID is required for editing');
+    this.errorMessage = 'Cannot edit ad: Invalid ID';
+  }
+}
+deleteAd(adId: number | undefined): void {
+  if (adId === undefined || adId === null) {
+    console.error('Ad ID is required for deletion');
+    this.errorMessage = 'Cannot delete ad: Invalid ID';
+    return;
+  }
+  if (confirm('Are you sure you want to delete this ad? This action cannot be undone.')) {
+    this.adservice.deleteAd(adId).subscribe({
+      next: (response) => {
+        console.log('Ad deleted successfully:', response);
+        // Refresh the ads list
+        this.loadAds();
+      },
+      error: (err) => {
+        console.error('Error deleting ad:', err);
+        this.errorMessage = 'Failed to delete ad';
+      }
+    });
+  }
+}
+
+goToCreate(){
+  this.router.navigate(['/ads/create'])
+}
 }

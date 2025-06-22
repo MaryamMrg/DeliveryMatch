@@ -1,1 +1,144 @@
-<p>update-ad-component works!</p>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <mat-card class="update-ad-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>edit</mat-icon>
+            Update Ad
+          </mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <!-- Loading Ad Spinner -->
+          <div *ngIf="loadingAd" class="text-center py-4">
+            <mat-spinner diameter="50"></mat-spinner>
+            <p class="mt-3 text-muted">Loading ad details...</p>
+          </div>
+
+          <!-- Content when ad is loaded -->
+          <div *ngIf="!loadingAd">
+            <!-- Success Message -->
+            <div *ngIf="successMessage" class="alert alert-success d-flex align-items-center mb-3" role="alert">
+              <mat-icon class="me-2">check_circle</mat-icon>
+              {{ successMessage }}
+            </div>
+            
+            <!-- Error Message -->
+            <div *ngIf="errorMessage" class="alert alert-danger d-flex align-items-center mb-3" role="alert">
+              <mat-icon class="me-2">error</mat-icon>
+              {{ errorMessage }}
+            </div>
+            
+            <form [formGroup]="adForm" (ngSubmit)="onSubmit()" class="ad-form">
+              <!-- Destination Field -->
+              <mat-form-field appearance="outline" class="w-100 mb-3">
+                <mat-label>Destination</mat-label>
+                <input 
+                  matInput 
+                  formControlName="destination" 
+                  placeholder="Enter destination"
+                  [class.is-invalid]="destination?.invalid && destination?.touched">
+                <mat-icon matSuffix>place</mat-icon>
+                <mat-error *ngIf="destination?.invalid && destination?.touched">
+                  Destination is required
+                </mat-error>
+              </mat-form-field>
+              
+              <!-- Date Field -->
+              <mat-form-field appearance="outline" class="w-100 mb-3">
+                <mat-label>Date</mat-label>
+                <input 
+                  matInput 
+                  type="date" 
+                  formControlName="date"
+                  [class.is-invalid]="date?.invalid && date?.touched">
+                <mat-icon matSuffix>calendar_today</mat-icon>
+                <mat-error *ngIf="date?.invalid && date?.touched">
+                  Date is required
+                </mat-error>
+              </mat-form-field>
+              
+              <!-- Transportation Type Field -->
+              <mat-form-field appearance="outline" class="w-100 mb-3">
+                <mat-label>Transportation Type</mat-label>
+                <mat-select 
+                  formControlName="m_type"
+                  [class.is-invalid]="m_type?.invalid && m_type?.touched">
+                  <mat-option value="bus">Bus</mat-option>
+                  <mat-option value="car">Car</mat-option>
+                  <mat-option value="van">Van</mat-option>
+                  <mat-option value="truck">Truck</mat-option>
+                  <mat-option value="motorcycle">Motorcycle</mat-option>
+                </mat-select>
+                <mat-icon matSuffix>directions_car</mat-icon>
+                <mat-error *ngIf="m_type?.invalid && m_type?.touched">
+                  Transportation type is required
+                </mat-error>
+              </mat-form-field>
+              
+              <!-- Capacity Field -->
+              <mat-form-field appearance="outline" class="w-100 mb-3">
+                <mat-label>Capacity</mat-label>
+                <input 
+                  matInput 
+                  type="number" 
+                  formControlName="capacity" 
+                  placeholder="Enter capacity"
+                  min="1"
+                  [class.is-invalid]="capacity?.invalid && capacity?.touched">
+                <mat-icon matSuffix>people</mat-icon>
+                <mat-error *ngIf="capacity?.invalid && capacity?.touched">
+                  <span *ngIf="capacity?.errors?.['required']">Capacity is required</span>
+                  <span *ngIf="capacity?.errors?.['min']">Capacity must be at least 1</span>
+                </mat-error>
+              </mat-form-field>
+            </form>
+          </div>
+        </mat-card-content>
+        
+        <mat-card-actions *ngIf="!loadingAd" class="d-flex justify-content-between align-items-center p-3 action-buttons">
+          <!-- Left side buttons -->
+          <div class="d-flex gap-2">
+            <button 
+              type="button" 
+              mat-stroked-button 
+              color="accent" 
+              (click)="onCancel()"
+              [disabled]="loading">
+              <mat-icon>arrow_back</mat-icon>
+              Cancel
+            </button>
+            
+            <button 
+              type="button" 
+              mat-stroked-button 
+              color="warn" 
+              
+              [disabled]="loading">
+              <mat-icon>refresh</mat-icon>
+              Reset
+            </button>
+          </div>
+          
+          <!-- Right side button -->
+          <button 
+            type="submit" 
+            mat-raised-button 
+            color="primary" 
+            (click)="onSubmit()"
+            
+            class="submit-btn">
+            <mat-spinner 
+              *ngIf="loading" 
+              diameter="20" 
+              class="me-2">
+            </mat-spinner>
+            <mat-icon *ngIf="!loading">save</mat-icon>
+            {{ loading ? 'Updating...' : 'Update Ad' }}
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

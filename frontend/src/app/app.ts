@@ -9,10 +9,11 @@ import { AdminDash } from "./admin-dash/admin-dash";
 import { RequestComponent } from "./request-component/request-component";
 import { AdComponent } from "./ad-component/ad-component";
 import { CreateAdComponent } from "./create-ad-component/create-ad-component";
+import { UpdateAdComponent } from "./update-ad-component/update-ad-component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, LoginComponent, SignupComponent, Navbar, HomeComponent, AdminDash, RequestComponent, AdComponent, CreateAdComponent],
+  imports: [RouterOutlet, LoginComponent, SignupComponent, Navbar, HomeComponent, AdminDash, RequestComponent, AdComponent,CreateAdComponent,UpdateAdComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

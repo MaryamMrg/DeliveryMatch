@@ -12,7 +12,7 @@ import java.util.List;
 public interface AdMapper {
 
 //    @Mapping(target = "driver", source = "user_id")
-    Ad toEntity(AdDto adDto);
+  Ad toEntity(AdDto adDto);
 //
 //    @Mapping(target = "user_id", source = "driver.user_id")
     AdDto toDto(Ad ad);

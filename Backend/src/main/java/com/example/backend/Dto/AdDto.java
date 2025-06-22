@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class AdDto {
 
+    private Long adId;
     private String Start;
     private String destination;
     private Date date;
@@ -11,12 +12,13 @@ public class AdDto {
     private Long capacity;
 
 
-    public AdDto(String start, String destination, Date date, String m_type, Long capacity ) {
+    public AdDto(String start, String destination, Date date, String m_type, Long capacity,Long adId ) {
         Start = start;
         this.destination = destination;
         this.date = date;
         M_type = m_type;
         this.capacity = capacity;
+        this.adId = adId;
 
 
     }
@@ -26,7 +28,13 @@ public class AdDto {
     public AdDto() {
     }
 
+    public Long getAdId() {
+        return adId;
+    }
 
+    public void setAdId(Long adId) {
+        this.adId = adId;
+    }
 
     public String getStart() {
         return Start;

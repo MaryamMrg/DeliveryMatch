@@ -40,55 +40,57 @@ export class UpdateAdComponent implements OnInit{
     
   }
 
-  ngOnInit(): void {
-    this.adForm = this.fb.group({
+ ngOnInit(): void {
+  this.adForm = this.fb.group({
     destination: ['', [Validators.required]],
     date: ['', [Validators.required]],
     m_type: ['', [Validators.required]],
     capacity: ['', [Validators.required, Validators.min(1)]]
   });
+
+  // ✅ Extract adId from URL route param
+  const idParam = this.route.snapshot.paramMap.get('id');
+  if (idParam) {
+    this.adId = +idParam; // convert to number
+    this.loadAd();        // now it's safe to call
+  } else {
+    this.errorMessage = 'Invalid ad ID';
   }
-private getAdId(): void {
-    this.route.params.subscribe(params => {
-      this.adId = params['id'];
-      if (this.adId) {
-        this.loadAd();
-      } else {
-        this.errorMessage = 'Invalid ad ID';
-      }
-    });
-  
 }
- private loadAd(): void {
-    this.loadingAd = true;
-    this.errorMessage = '';
 
-    this.adService.getAdById(this.adId).subscribe({
-      next: (ad: Ad) => {
-        this.currentAd = ad;
-        this.populateForm(ad);
-        this.loadingAd = false;
-      }
-    });
-  }
- private populateForm(ad: Ad): void {
-    const formattedDate = ad.date instanceof Date 
-      ? ad.date.toISOString().split('T')[0] 
-      : new Date(ad.date).toISOString().split('T')[0];
 
-    this.adForm.patchValue({
-      destination: ad.destination,
-      date: formattedDate,
-      m_type: ad.m_type,
-      capacity: ad.capacity
-    });
-  }
+private loadAd(): void {
+  this.loadingAd = true;
+  this.errorMessage = '';
+
+  this.adService.getAdById(this.adId).subscribe({
+    next: (ad: Ad) => {
+      this.currentAd = ad;
+console.log('ad:',this.currentAd)
+      // ✅ Pre-fill form fields
+      this.adForm.patchValue({
+        destination: ad.destination,
+        date: new Date(ad.date).toISOString().substring(0, 10),
+        m_type: ad.m_type,
+        capacity: ad.capacity,
+        start:ad.start
+      });
+
+      this.loadingAd = false;
+    },
+    error: (err) => {
+      this.errorMessage = 'Failed to load ad details';
+      this.loadingAd = false;
+    }
+  });
+}
+
 
   get destination() { return this.adForm.get('destination'); }
   get date() { return this.adForm.get('date'); }
   get m_type() { return this.adForm.get('m_type'); }
   get capacity() { return this.adForm.get('capacity'); }
-
+  get start(){return this.adForm.get('start')}
   onSubmit(): void {
     if (this.adForm.valid && this.adId) {
       this.loading = true;
@@ -96,11 +98,12 @@ private getAdId(): void {
       this.successMessage = '';
 
       const updatedAdData: Ad = {
-        ...this.currentAd,
-        destination: this.adForm.value.destination,
-        date: new Date(this.adForm.value.date),
-        m_type: this.adForm.value.m_type,
-        capacity: this.adForm.value.capacity
+        ...this.currentAd,  // This spreads existing properties including id
+  destination: this.adForm.value.destination || '',
+  date: new Date(this.adForm.value.date || new Date()),
+  m_type: this.adForm.value.m_type || null,
+  capacity: this.adForm.value.capacity || 0,
+  start: this.adForm.value.start || null  // H
       };
 
       this.adService.updateAd(this.adId, updatedAdData).subscribe({
@@ -121,15 +124,12 @@ private getAdId(): void {
         }
       });
     }
+    
   }
 
   onCancel(): void {
     this.router.navigate(['/ads']);
   }
 
-  onReset(): void {
-    if (this.currentAd) {
-      this.populateForm(this.currentAd);
-    }
-  }
+  
 }

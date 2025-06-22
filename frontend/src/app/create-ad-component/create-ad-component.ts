@@ -45,7 +45,8 @@ ngOnInit(): void {
     destination: ['', [Validators.required]],
     date: ['', [Validators.required]],
     m_type: ['', [Validators.required]],
-    capacity: ['', [Validators.required, Validators.min(1)]]
+    capacity: ['', [Validators.required, Validators.min(1)]],
+    start: ['', [Validators.required]]
   });
 }
 
@@ -53,7 +54,7 @@ ngOnInit(): void {
   get date() { return this.adForm.get('date'); }
   get m_type() { return this.adForm.get('m_type'); }
   get capacity() { return this.adForm.get('capacity'); }
-
+  get start() { return this.adForm.get('start'); }
 
   onSumbit():void{
     if(this.adForm.valid){
@@ -62,23 +63,33 @@ ngOnInit(): void {
       this.successMessage='';
 
          const adData: Ad= {
-        destination: this.adForm.value.destination,
-        date: new Date(this.adForm.value.date),
-        m_type: this.adForm.value.m_type,
-        capacity: this.adForm.value.capacity
+     
+  destination: this.adForm.value.destination || '',
+  date: new Date(this.adForm.value.date || new Date()),
+  m_type: this.adForm.value.m_type || null,
+  capacity: this.adForm.value.capacity || 0,
+  start: this.adForm.value.Start || null  // H
       };
 
       this.adService.createAd(adData).subscribe({
+
         next : (response)=>{
           console.log('Ad created successfully:',response);
           this.successMessage='Ad created successfully!';
           this.loading=false;
-        },error :(err)=> {
+
+          setTimeout(() => {
+            this.router.navigate(['/ads']);
+          }, 2000);
+        },
+        
+        error :(err)=> {
           console.error('error creating ad:',err);
           this.errorMessage='failed to create ad';
           this.loading=false;
         },
       })
+
     }
   }
 }
