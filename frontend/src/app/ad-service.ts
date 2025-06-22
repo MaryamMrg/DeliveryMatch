@@ -44,4 +44,7 @@ return this.http.post<Ad>(this.apiUrl,ad,{headers:this.getAuthHeader()});
     return this.http.delete(`${this.apiUrl}/${id}`,{headers:this.getAuthHeader()})
 
   }
+  getAdById():Observable<any>{
+return this.http.get<any>(`${this.apiUrl}/`)
+  }
 }
