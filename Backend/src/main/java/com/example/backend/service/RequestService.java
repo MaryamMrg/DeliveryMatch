@@ -104,4 +104,20 @@ public class RequestService {
     public void deleteRequest(Long id) {
         requestRepository.deleteById(id);
     }
+
+    public List<RequestDto> getRequestsByAdId(Long adId) {
+        System.out.println("=== DEBUG GET REQUESTS BY AD ===");
+        System.out.println("Looking for requests with ad_id: " + adId);
+
+        // Find all requests for this ad
+        List<Request> requests = requestRepository.findByAdAdId(adId);
+
+        System.out.println("Found " + requests.size() + " requests for ad " + adId);
+
+        // Convert to DTOs
+        List<RequestDto> requestDtos = requestMapper.toDtos(requests);
+
+        System.out.println("=== END DEBUG ===");
+        return requestDtos;
+    }
 }

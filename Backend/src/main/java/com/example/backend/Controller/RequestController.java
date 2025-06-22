@@ -24,6 +24,7 @@ public class RequestController {
     @GetMapping
     public List<RequestDto> getRequests() {return requestService.findAllRequests();}
 
+
     @DeleteMapping("/{id}")
     public void deleteRequest(@PathVariable Long id) {requestService.deleteRequest(id);}
 
@@ -31,5 +32,20 @@ public class RequestController {
     public RequestDto updateRequest(@RequestBody RequestDto requestDto , @PathVariable Long id) {
         return requestService.updateRequest(requestDto, id);
     }
+    @GetMapping("/ad/{adId}")
+    public ResponseEntity<List<RequestDto>> getRequestsByAd(@PathVariable Long adId) {
+        System.out.println("=== GET REQUESTS BY AD ENDPOINT ===");
+        System.out.println("Received request for ad ID: " + adId);
 
+        try {
+            List<RequestDto> requests = requestService.getRequestsByAdId(adId);
+
+            System.out.println("Returning " + requests.size() + " requests");
+            return ResponseEntity.ok(requests);
+
+        } catch (Exception e) {
+            System.out.println("ERROR getting requests by ad: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();
+        }}
 }

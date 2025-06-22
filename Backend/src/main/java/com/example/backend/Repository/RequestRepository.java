@@ -1,5 +1,6 @@
 package com.example.backend.Repository;
 
+import com.example.backend.Model.Ad;
 import com.example.backend.Model.Request;
 import com.example.backend.Model.Status;
 import org.springframework.data.jpa.repository.JpaRepository;

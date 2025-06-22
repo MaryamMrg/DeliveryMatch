@@ -5,6 +5,7 @@ import { SignupComponent } from './signup-component/signup-component';
 import { AdComponent } from './ad-component/ad-component';
 import { UpdateAdComponent } from './update-ad-component/update-ad-component';
 import { CreateAdComponent } from './create-ad-component/create-ad-component';
+import { RequestComponent } from './request-component/request-component';
 
 export const routes: Routes = [
 
@@ -13,7 +14,6 @@ export const routes: Routes = [
     {path : 'signup' , component : SignupComponent},
     {path: 'ads',component : AdComponent},
     {path: 'ads/update/:id',component:UpdateAdComponent},
-    {path: 'ads/create',component:CreateAdComponent
-        
-    }
+    {path: 'ads/create',component:CreateAdComponent},
+    {path: 'ads/request/:adId',component:RequestComponent}
 ];

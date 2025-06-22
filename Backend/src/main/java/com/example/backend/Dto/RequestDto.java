@@ -4,9 +4,9 @@ import com.example.backend.Model.Status;
 
 public class RequestDto {
 
-
+    private Long r_id;
     private Long ad_id;
-    private Long sender_id;
+
     private Long packId;
 
     private Status status;
@@ -15,19 +15,19 @@ public class RequestDto {
     public RequestDto() {
     }
 
-    public RequestDto(Long ad_id, Long sender_id, Long packId, Status status) {
-       this.ad_id = ad_id;
-        this.sender_id = sender_id;
+    public RequestDto(Long r_id, Long ad_id, Long packId, Status status) {
+        this.r_id = r_id;
+        this.ad_id = ad_id;
         this.packId = packId;
         this.status = status;
     }
 
-    public Long getSender_id() {
-        return sender_id;
+    public Long getR_id() {
+        return r_id;
     }
 
-    public void setSender_id(Long sender_id) {
-        this.sender_id = sender_id;
+    public void setR_id(Long r_id) {
+        this.r_id = r_id;
     }
 
     public Long getPackId() {

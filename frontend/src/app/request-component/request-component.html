@@ -1,53 +1,8 @@
-<!-- request-component.html -->
-<div class="request-management-container">
-  <!-- Header Section -->
-  <div class="header-section">
-    <h1>Request Management</h1>
-    <button mat-raised-button color="primary" class="create-button" >
-      <mat-icon>add</mat-icon>
-      Create Request
-    </button>
-  </div>
+<form [formGroup]="requestForm" (ngSubmit)="onSumbit()">
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
 
-  <mat-divider></mat-divider>
+  
 
-  <!-- Loading State -->
-  <div *ngIf="loading" class="loading-state">
-    <mat-spinner diameter="40"></mat-spinner>
-    <p>Loading requests...</p>
-  </div>
-
-  <!-- Empty State -->
-  <div class="empty-state" *ngIf="!loading && requests.length === 0">
-    <div class="empty-content">
-      <h2>No Requests Found</h2>
-      <p>There are no requests available at the moment</p>
-      <button mat-raised-button color="primary">
-        <mat-icon>add</mat-icon>
-        Create First Request
-      </button>
-    </div>
-  </div>
-
-  <!-- Requests List -->
-  <div class="requests-list" *ngIf="!loading && requests.length>0">
-    <mat-card class="request-card" *ngFor="let request of requests">
-      <mat-card-content>
-        <div class="request-content">
-          <div class="request-info">
-            <h3>Request #{{request.id}}</h3>
-            <p>Sender: {{request.senderId}}</p>
-            <p>Package: {{request.packId}}</p>
-          </div>
-          <div class="request-status">
-            <span class="status-badge">
-              {{request.status}}
-            </span>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-
-</div>
+  <button mat-raised-button color="primary" type="submit">Send Request</button>
+</form>

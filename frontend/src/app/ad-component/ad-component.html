@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <!-- Loading Spinner -->
+  <!-- Loading  -->
   <div class="row" *ngIf="loading">
     <div class="col-12 text-center">
       <mat-spinner class="mx-auto"></mat-spinner>
@@ -88,7 +88,7 @@
             <mat-icon class="me-1">delete</mat-icon>
             Delete
           </button>
-           <button mat-button color="warn">
+           <button mat-button color="warn" (click)="goToRequest(ad.adId)">
             <mat-icon class="me-1">Request</mat-icon>
             
           </button>
@@ -97,7 +97,7 @@
     </div>
   </div>
 
-  <!-- No Ads Message -->
+  
   <div class="row" *ngIf="!loading && ads.length === 0 && !errorMessage">
     <div class="col-12 text-center">
       <mat-card class="no-ads-card">

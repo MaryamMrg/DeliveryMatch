@@ -45,7 +45,8 @@ export class UpdateAdComponent implements OnInit{
     destination: ['', [Validators.required]],
     date: ['', [Validators.required]],
     m_type: ['', [Validators.required]],
-    capacity: ['', [Validators.required, Validators.min(1)]]
+    capacity: ['', [Validators.required, Validators.min(1)]],
+     start: ['', [Validators.required]]
   });
 
   // ✅ Extract adId from URL route param

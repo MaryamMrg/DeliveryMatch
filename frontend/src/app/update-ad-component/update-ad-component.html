@@ -93,6 +93,19 @@
                   <span *ngIf="capacity?.errors?.['min']">Capacity must be at least 1</span>
                 </mat-error>
               </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-100 mb-3">
+                <mat-label>Destination</mat-label>
+                <input 
+                  matInput 
+                  formControlName="start" 
+                  placeholder="Enter start"
+                  [class.is-invalid]="start?.invalid && start?.touched">
+                <mat-icon matSuffix>place</mat-icon>
+                <mat-error *ngIf="start?.invalid && start?.touched">
+                  Start is required
+                </mat-error>
+              </mat-form-field>
             </form>
           </div>
         </mat-card-content>

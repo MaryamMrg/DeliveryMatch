@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 
 export interface Request{
   id?:number,
-  senderId:number,
   packId:number,
-  status:string
+  status:string,
+  ad_id:number
 }
 @Injectable({
   providedIn: 'root'
@@ -40,5 +40,9 @@ export class RequestService {
 
  deleteRequest(id :number):Observable<any>{
   return this.http.delete(`${this.apiUrl}/${id}`,{headers:this.getAuthHeader()});
+ }
+
+ getRequestByAd(adId:number):Observable<Request[]>{
+  return this.http.get<Request[]>(`${this.apiUrl}/ad/${adId}`,{headers:this.getAuthHeader()})
  }
 }

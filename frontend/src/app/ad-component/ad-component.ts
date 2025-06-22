@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Ad, AdService } from '../ad-service';
 import { CommonModule } from '@angular/common';
 
-// Add to your module imports:
+
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -65,7 +65,7 @@ deleteAd(adId: number | undefined): void {
     this.adservice.deleteAd(adId).subscribe({
       next: (response) => {
         console.log('Ad deleted successfully:', response);
-        // Refresh the ads list
+       
         this.loadAds();
       },
       error: (err) => {
@@ -78,5 +78,21 @@ deleteAd(adId: number | undefined): void {
 
 goToCreate(){
   this.router.navigate(['/ads/create'])
+}
+
+
+
+
+
+goToRequest(adId: number | undefined): void {
+  console.log('goToRequest called with adId:', adId);
+  console.log('Type of adId:', typeof adId);
+  
+  if (adId !== undefined && adId !== null) {
+    this.router.navigate(['/ads/request', adId]);
+  } else {
+    console.error('Ad ID is required for a request');
+    this.errorMessage = 'Cannot request ad: Invalid ID';
+  }
 }
 }
