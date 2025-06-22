@@ -1,0 +1,75 @@
+.create-ad-card {
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.create-ad-card mat-card-header {
+  background-color: #f5f5f5;
+  margin: -24px -24px 24px -24px;
+  padding: 16px 24px;
+  border-radius: 8px 8px 0 0;
+}
+
+.create-ad-card mat-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.ad-form {
+  margin-top: 16px;
+}
+
+.mat-mdc-form-field {
+  margin-bottom: 16px;
+}
+
+.submit-btn {
+  min-width: 140px;
+  height: 40px;
+}
+
+.alert {
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+mat-card-actions {
+  background-color: #fafafa;
+  margin: 24px -24px -24px -24px;
+  padding: 16px 24px;
+  border-radius: 0 0 8px 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  mat-card-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  mat-card-actions button {
+    width: 100%;
+  }
+}

@@ -52,8 +52,10 @@ export class SignupComponent implements OnInit{
       console.log(this.registerForm.value);
       const data :  RegisterRequest= this.registerForm.value;
       this.authService.register(data).subscribe({
-        next : response =>{
+        next : (response) =>{
           this.successMessage = 'Registration successful';
+
+          console.log('user:',response)
           this.errorMessage = '';
           this.registerForm.reset();
           //pour rediriger après 1,5 second vers login

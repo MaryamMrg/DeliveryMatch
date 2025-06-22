@@ -7,10 +7,12 @@ import { Navbar } from "./navbar/navbar";
 import { HomeComponent } from "./home-component/home-component";
 import { AdminDash } from "./admin-dash/admin-dash";
 import { RequestComponent } from "./request-component/request-component";
+import { AdComponent } from "./ad-component/ad-component";
+import { CreateAdComponent } from "./create-ad-component/create-ad-component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, LoginComponent, SignupComponent, Navbar, HomeComponent, AdminDash, RequestComponent],
+  imports: [RouterOutlet, LoginComponent, SignupComponent, Navbar, HomeComponent, AdminDash, RequestComponent, AdComponent, CreateAdComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

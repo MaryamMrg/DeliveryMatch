@@ -35,8 +35,8 @@ export class AuthService {
     return this.http.post<LoginResponse>(`${this.apiUrl}/api/v1/auth/authenticate`,credentials)
   }
 
-  register(userdata : RegisterRequest):Observable<any>{
- return this.http.post(`${this.apiUrl}/api/v1/auth/register`,userdata);
+  register(userdata : {name:string,email:string,password:string,role:string}):Observable<any>{
+ return this.http.post<RegisterRequest>(`${this.apiUrl}/api/v1/auth/register`,userdata);
   }
 
   getToken():string | null{
