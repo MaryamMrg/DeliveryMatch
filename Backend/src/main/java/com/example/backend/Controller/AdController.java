@@ -29,7 +29,10 @@ public class AdController {
     public AdDto updateAd(@RequestBody AdDto updateDto,@PathVariable Long id) {
         return adService.updateAd(updateDto,id);
     }
-
+@GetMapping("/AdByID/{id}")
+public AdDto getAdById(@PathVariable Long id) {
+        return  adService.getAd(id);
+}
     @DeleteMapping("/{id}")
     public void deleteAd(@PathVariable Long id) {
          adService.deleteAd(id);
