@@ -93,4 +93,8 @@ ngOnInit(): void {
 
     }
   }
+
+  navigateToAds(){
+this.router.navigate(['/ads'])
+  }
 }

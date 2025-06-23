@@ -59,7 +59,7 @@ export class SignupComponent implements OnInit{
           console.log('user:',response)
           this.errorMessage = '';
           this.registerForm.reset();
-          //pour rediriger après 1,5 second vers login
+         
           setTimeout(()=> this.router.navigate(['/login']),1500);
         },
         error: err=>{

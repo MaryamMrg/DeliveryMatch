@@ -14,9 +14,7 @@ import { AuthService } from '../auth-service';
 })
 export class AuthGuard implements CanActivate {
 
- 
-    
- constructor(
+  constructor(
     private authService: AuthService,
     private router: Router
   ) {}
@@ -30,10 +28,23 @@ export class AuthGuard implements CanActivate {
       const expectedRole = route.data['expectedRole'];
       const userRole = this.authService.getRole();
       
-      if (expectedRole && userRole !== expectedRole) {
-        this.router.navigate(['/']);
-        return false;
+      if (expectedRole) {
+        // Check if expectedRole is an array
+        if (Array.isArray(expectedRole)) {
+          // For arrays, check if user's role is included
+          if (!expectedRole.includes(userRole)) {
+            this.router.navigate(['/']);
+            return false;
+          }
+        } else {
+          // For single role, do direct comparison (backward compatibility)
+          if (userRole !== expectedRole) {
+            this.router.navigate(['/']);
+            return false;
+          }
+        }
       }
+      
       return true;
     }
 

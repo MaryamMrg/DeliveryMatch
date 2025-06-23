@@ -12,6 +12,11 @@ import { DriverDashboard } from './driver-dashboard/driver-dashboard';
 import { SenderDashboard } from './sender-dashboard/sender-dashboard';
 
 export const routes: Routes = [
+
+    
+    {path : '', component :HomeComponent},
+    {path : 'login', component : LoginComponent},
+    {path : 'signup' , component : SignupComponent},
 { 
     path: 'admin-dashboard', 
     component: AdminDash,
@@ -35,24 +40,23 @@ export const routes: Routes = [
     component: UpdateAdComponent,
     canActivate: [AuthGuard],
     data: { expectedRole: 'DRIVER' }
-  },{
-    path: 'ads',
+  },
+  
+    {
+    path: 'ads/create',
     component: CreateAdComponent,
     canActivate: [AuthGuard],
-    data: { expectedRole: 'DRIVER' }
+    data: { expectedRole: 'DRIVER' }  
   },  {
     path: 'ads',
     component: AdComponent,
     canActivate: [AuthGuard],
-    data: { expectedRole: 'SENDER' }  
+    data: { expectedRole: ['SENDER','DRIVER'] }  
   },{
     path: 'ads/request/:adId',
     component: RequestComponent,
     canActivate: [AuthGuard],
     data: { expectedRole: 'SENDER' } 
-  },
-    {path : '', component :HomeComponent},
-    {path : 'login', component : LoginComponent},
-    {path : 'signup' , component : SignupComponent},
+  }
     
 ];

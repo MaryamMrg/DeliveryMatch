@@ -22,11 +22,14 @@ export class AdComponent implements OnInit{
   loading=true;
   ads:Ad[]=[]
   ad! : Ad;
-isDriver: boolean = false;
+ userRole: string | null = null;
   constructor(private adservice:AdService,private router:Router,private authservice:AuthService){}
 
   ngOnInit(): void {
     this.loadAds();
+    // this.isDriver();
+
+    this.userRole=this.authservice.getRole();
   }
 
 
@@ -82,9 +85,9 @@ goToCreate(){
 }
 
 
- checkUserRole() {
-    this.isDriver = this.authservice.getRole() === 'DRIVER';
-  }
+//  isDriver() {
+//     this.isdriver = this.authservice.getRole() === 'DRIVER';
+//   }
 
 
 goToRequest(adId: number | undefined): void {

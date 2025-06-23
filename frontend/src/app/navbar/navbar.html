@@ -1,20 +1,21 @@
 <mat-toolbar class="custom-navbar">
   <div class="container-fluid">
-    <div class="navvvv">
-      <!-- Brand/Logo Column -->
+    <div class="navbar">
+      
+     
       <div class="col-md-3">
         <a class="navbar-brand" routerLink="/">
           DeliveryMatch
         </a>
       </div>
       
-      <!-- Navigation Links Column -->
+     
       <div class="col-md-6">
         <nav class="nav">
-          <!-- Public links -->
-          <a class="nav-link" routerLink="/">Home</a>
+        
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
           
-          <!-- Role-specific links -->
+        
           <ng-container *ngIf="isLoggedIn">
             <!-- Admin Links -->
             <a class="nav-link" 
@@ -24,14 +25,14 @@
           
             <ng-container *ngIf="userRole === 'DRIVER'">
               <a class="nav-link" routerLink="/driver-dashboard">Driver Dashboard</a>
-              <a class="nav-link" routerLink="/ads/update/1">Update Ad</a>
-              <a class="nav-link" routerLink="/ads/create">Create Ad</a>
+              
+              <a class="nav-link" routerLink="/ads/create" >Create Ad</a>
             </ng-container>
             
             
             <ng-container *ngIf="userRole === 'SENDER'">
               <a class="nav-link" routerLink="/sender-dashboard">Sender Dashboard</a>
-              <a class="nav-link" routerLink="/ads/request/1">Request Ad</a>
+              <a class="nav-link" routerLink="/ads"> Ads</a>
             </ng-container>
           </ng-container>
         </nav>

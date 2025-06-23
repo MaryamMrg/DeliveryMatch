@@ -73,7 +73,7 @@ onSumbit():void{
          console.log('FULL LOGIN RESPONSE:', response.user);
           
           console.log('saved token : ', response.token);
-          console.log('user role is:', response.user);
+          console.log('user  is:', response.user);
           
            switch(response.user.role) {
           case 'ADMIN':

@@ -16,7 +16,7 @@
             <mat-icon class="me-2">refresh</mat-icon>
             Load Ads
           </button> 
-           <button mat-raised-button color="primary" (click)="goToCreate()" [disabled]="!isDriver">
+           <button mat-raised-button color="primary" (click)="goToCreate()" *ngIf="userRole==='DRIVER'">
             <mat-icon class="me-2">create Ad</mat-icon>
             craete Ads
           </button>
@@ -80,15 +80,15 @@
           </div>
         </mat-card-content>
         <mat-card-actions class="action-buttons">
-          <button mat-button color="primary"  (click)="navigateToUpdate(ad.adId)" [disabled]="!isDriver">
+          <button mat-button color="primary"  (click)="navigateToUpdate(ad.adId)" *ngIf="userRole==='DRIVER'" >
             <mat-icon class="me-1" >edit</mat-icon>
             Edit
           </button>
-          <button mat-button color="warn" (click)="deleteAd(ad.adId)" [disabled]="!isDriver" >
+          <button mat-button color="warn" (click)="deleteAd(ad.adId)" *ngIf="userRole==='DRIVER'" >
             <mat-icon class="me-1">delete</mat-icon>
             Delete
           </button>
-           <button mat-button color="warn" (click)="goToRequest(ad.adId)">
+           <button mat-button color="warn" (click)="goToRequest(ad.adId)" *ngIf="userRole ==='SENDER'">
             <mat-icon class="me-1">Request</mat-icon>
             
           </button>
