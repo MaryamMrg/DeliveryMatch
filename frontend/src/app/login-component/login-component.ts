@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-login-component',
   imports: [ CommonModule, 
@@ -35,7 +36,7 @@ export class LoginComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,private snackBar:MatSnackBar
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required]],
@@ -54,28 +55,40 @@ onSumbit():void{
   this.errorMessage='';
   this.successMessage='';
   this.loading=true;
+
  if (this.loginForm.valid) {
+
       console.log(this.loginForm.value);
-
       const dataLogin = this.loginForm.value;
-      this.authService.login(dataLogin).subscribe({
-        next: (response) => {
-          localStorage.setItem('token', response.token);
-          localStorage.setItem('role', response.role);
-console.log('saved token : ', response.token);
-console.log('user role is:', response.role);
 
-          if(response.role === "ADMIN"){
-            alert("welcome ADMIN")
-            // this.router.navigate(['/admin-dashboard']);
-          }else if(response.role==="DRIVER"){
-            alert("welcome DRIVER")
-          }else {
-            alert("welcome SENDER")
-            //this.router.navigate(['user-dashboard']);
-          }
-          console.log('saved user is', response.user)
-        },
+      this.authService.login(dataLogin).subscribe({
+
+        next: (response) => {
+          this.authService.saveUserData(response);
+          this.snackBar.open('login successful','close',{duration:4000});
+          // this.router.navigate(['/ads']);
+
+          this.authService.saveToken(response.token);
+          this.authService.saveRole(response.user.role);
+         console.log('FULL LOGIN RESPONSE:', response.user);
+          
+          console.log('saved token : ', response.token);
+          console.log('user role is:', response.user);
+          
+           switch(response.user.role) {
+          case 'ADMIN':
+            this.router.navigate(['/admin-dashboard']);
+            break;
+          case 'DRIVER':
+            this.router.navigate(['/ads']);
+            break;
+          case 'SENDER':
+            this.router.navigate(['/ads']);
+            break;
+          default:
+            this.router.navigate(['/']);
+        }
+      },
         error: (err)=>{
           this.errorMessage = typeof err === 'string' ? err : 'Login failed';
         }

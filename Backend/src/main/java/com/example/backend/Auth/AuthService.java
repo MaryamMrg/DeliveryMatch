@@ -1,6 +1,7 @@
 package com.example.backend.Auth;
 
 import com.example.backend.Config.JwtService;
+import com.example.backend.Dto.UserDto;
 import com.example.backend.Model.Admin;
 import com.example.backend.Model.Driver;
 import com.example.backend.Model.Sender;
@@ -39,12 +40,13 @@ public class AuthService {
             default -> throw new IllegalArgumentException("Invalid role: " + request.getRole());
         }
 
-        user.setName(request.getName()); // or request.getUsername()
+        user.setName(request.getName()); 
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(request.getRole());
 
-        userRepository.save(user); // use appropriate repository for the subclass
+        userRepository.save(user);
+
 
         String jwtToken = jwtService.generateToken(user);
 
@@ -59,14 +61,20 @@ public class AuthService {
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
                         request.getPassword()
+
                 )
         );
 
         User user = userRepository.findByEmail(request.getEmail());
         String jwtToken = jwtService.generateToken(user);
 
+       UserDto userDto=new UserDto(
+               user.getName(),user.getEmail(),user.getRole(),null
+       );
+
         AuthResponse response = new AuthResponse();
         response.setToken(jwtToken);
+       response.setUser(userDto);
         return response;
     }
 }

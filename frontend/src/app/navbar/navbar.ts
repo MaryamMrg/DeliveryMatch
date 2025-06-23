@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,6 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
 import { Router } from '@angular/router';
+import { AuthService, User } from '../auth-service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-navbar',
   imports: [ CommonModule,
@@ -28,11 +30,17 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
 })
-export class Navbar {
-constructor(private router :Router){
+export class Navbar implements OnInit{
+  
+  currentUser:User|null=null;
+constructor(private router :Router,private authservice:AuthService,private snackBar:MatSnackBar){
+  this.authservice.currentUser$.subscribe(user=>{
+    this.currentUser=user;
+  });
+}
+ngOnInit(): void {
   
 }
-
 goToLogin(){
 this.router.navigate(['/login']);
 }
@@ -44,4 +52,16 @@ goToRegister(){
 }
 
 
+  logout() {
+    this.authservice.logout();
+    this.snackBar.open('Logged out successfully', 'Close', {duration: 3000});
+    this.router.navigate(['/login']);
+  }
+    get isLoggedIn(): boolean {
+    return this.authservice.isLoggedIn();
+  }
+
+  get userRole(): string | null {
+    return this.authservice.getRole();
+  }
 }

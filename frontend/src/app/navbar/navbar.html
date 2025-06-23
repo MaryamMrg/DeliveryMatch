@@ -1,33 +1,60 @@
 <mat-toolbar class="custom-navbar">
-      <div class="container-fluid">
-        <div class="navvvv">
-          <!-- Brand/Logo Column -->
-          <div class="col-md-3">
-            <a class="navbar-brand" href="#">
-              DeliveryMatch
-            </a>
-          </div>
-          
-          <!-- Navigation Links Column -->
-          <div class="col-md-6">
-            <nav class="nav ">
-              <a class="nav-link" href="#">Home</a>
-              <a class="nav-link" href="ads">Ads</a>
-              <a class="nav-link" href="aboutus">About Us</a>
-
-            </nav>
-          </div>
-          
-          <!-- Action Buttons Column -->
-          <div class="col-md-3 text-end">
-            <button (click)="goToLogin()" mat-stroked-button class="login-btn me-2">
-              Login
-            </button>
-            <button (click)="goToRegister()" class="signup-btn" >
-              Signup
-            </button>
-          </div>
-          
-        
-        </div>
+  <div class="container-fluid">
+    <div class="navvvv">
+      <!-- Brand/Logo Column -->
+      <div class="col-md-3">
+        <a class="navbar-brand" routerLink="/">
+          DeliveryMatch
+        </a>
       </div>
+      
+      <!-- Navigation Links Column -->
+      <div class="col-md-6">
+        <nav class="nav">
+          <!-- Public links -->
+          <a class="nav-link" routerLink="/">Home</a>
+          
+          <!-- Role-specific links -->
+          <ng-container *ngIf="isLoggedIn">
+            <!-- Admin Links -->
+            <a class="nav-link" 
+               *ngIf="userRole === 'ADMIN'" 
+               routerLink="/admin-dashboard">Admin Dashboard</a>
+            
+          
+            <ng-container *ngIf="userRole === 'DRIVER'">
+              <a class="nav-link" routerLink="/driver-dashboard">Driver Dashboard</a>
+              <a class="nav-link" routerLink="/ads/update/1">Update Ad</a>
+              <a class="nav-link" routerLink="/ads/create">Create Ad</a>
+            </ng-container>
+            
+            
+            <ng-container *ngIf="userRole === 'SENDER'">
+              <a class="nav-link" routerLink="/sender-dashboard">Sender Dashboard</a>
+              <a class="nav-link" routerLink="/ads/request/1">Request Ad</a>
+            </ng-container>
+          </ng-container>
+        </nav>
+      </div>
+      
+
+      <div class="col-md-3 text-end">
+        <ng-container *ngIf="!isLoggedIn; else userControls">
+          <button (click)="goToLogin()" mat-stroked-button class="login-btn me-2">
+            Login
+          </button>
+          <button (click)="goToRegister()" class="signup-btn">
+            Signup
+          </button>
+        </ng-container>
+        
+        <ng-template #userControls>
+          <span class="me-3">Welcome, {{currentUser?.name}}</span>
+          <button (click)="logout()" mat-stroked-button class="logout-btn">
+            Logout
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>

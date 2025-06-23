@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth-service';
 @Component({
   selector: 'app-ad-component',
   imports: [CommonModule ,MatButtonModule,MatCardModule,MatIconModule,MatProgressSpinnerModule],
@@ -21,8 +22,8 @@ export class AdComponent implements OnInit{
   loading=true;
   ads:Ad[]=[]
   ad! : Ad;
-
-  constructor(private adservice:AdService,private router:Router){}
+isDriver: boolean = false;
+  constructor(private adservice:AdService,private router:Router,private authservice:AuthService){}
 
   ngOnInit(): void {
     this.loadAds();
@@ -81,7 +82,9 @@ goToCreate(){
 }
 
 
-
+ checkUserRole() {
+    this.isDriver = this.authservice.getRole() === 'DRIVER';
+  }
 
 
 goToRequest(adId: number | undefined): void {

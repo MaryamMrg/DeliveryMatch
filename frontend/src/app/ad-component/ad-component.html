@@ -15,8 +15,8 @@
           <button mat-raised-button color="primary" (click)="loadAds()">
             <mat-icon class="me-2">refresh</mat-icon>
             Load Ads
-          </button>
-           <button mat-raised-button color="primary" (click)="goToCreate()">
+          </button> 
+           <button mat-raised-button color="primary" (click)="goToCreate()" [disabled]="!isDriver">
             <mat-icon class="me-2">create Ad</mat-icon>
             craete Ads
           </button>
@@ -80,11 +80,11 @@
           </div>
         </mat-card-content>
         <mat-card-actions class="action-buttons">
-          <button mat-button color="primary"  (click)="navigateToUpdate(ad.adId)">
+          <button mat-button color="primary"  (click)="navigateToUpdate(ad.adId)" [disabled]="!isDriver">
             <mat-icon class="me-1" >edit</mat-icon>
             Edit
           </button>
-          <button mat-button color="warn" (click)="deleteAd(ad.adId)" >
+          <button mat-button color="warn" (click)="deleteAd(ad.adId)" [disabled]="!isDriver" >
             <mat-icon class="me-1">delete</mat-icon>
             Delete
           </button>

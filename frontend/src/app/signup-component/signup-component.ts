@@ -33,6 +33,7 @@ export class SignupComponent implements OnInit{
     private authService: AuthService,
     private router: Router){
       this.registerForm= this.formBuilder.group({
+        name:['',[Validators.required]],
         email:['',[Validators.required]],
         password:['',[Validators.required]],
         role:['',[Validators.required]]
