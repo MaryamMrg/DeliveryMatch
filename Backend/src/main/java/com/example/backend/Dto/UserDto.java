@@ -4,13 +4,22 @@ import com.example.backend.Model.Role;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class UserDto {
     private String name;
     private String email;
     private Role role;
     private String password;
+
+    public UserDto(String name, String email, Role role, String password) {
+        this.name = name;
+        this.email = email;
+        this.role = role;
+        this.password = password;
+    }
+
+    public UserDto() {
+    }
 
     public String getPassword() {
         return password;

@@ -10,8 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -21,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AdServiceTest {
 
-    //mock : faking it (real dependencies
     @Mock
     private AdRepository adRepository;
 
@@ -32,52 +30,99 @@ class AdServiceTest {
     private UserRepository userRepository;
 
     @Mock
-    SecurityContext securityContext;
+    private SecurityContext securityContext;
 
     @Mock
     private Authentication authentication;
 
-    //fake dependencies with real service
     @InjectMocks
     private AdService adService;
 
-    //setting up the fake objects run this before testing
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
         SecurityContextHolder.setContext(securityContext);
     }
+
     @Test
     void createAd() {
+
+
         // Fake input
         AdDto inputDto = new AdDto();
         inputDto.setDestination("meknes");
+        System.out.println("Input : " + inputDto.getDestination());
 
         // Expected entity from mapper
         Ad fakeAd = new Ad();
         fakeAd.setDestination("meknes");
+        System.out.println("Fake Ad: " + fakeAd.getDestination());
 
         // Fake driver from userRepository
         Driver fakeDriver = new Driver();
         fakeDriver.setEmail("meryamama@gmail.com");
+        System.out.println("Fake Driver: " + fakeDriver.getEmail());
 
-        // Final DTO expected to return
+        //  expected  return
         AdDto responseDto = new AdDto();
         responseDto.setDestination("meknes");
+        System.out.println("Expected Response : " + responseDto.getDestination());
 
-        // Mocks
+
         when(adMapper.toEntity(inputDto)).thenReturn(fakeAd);
+
+
         when(securityContext.getAuthentication()).thenReturn(authentication);
+
+
         when(authentication.getName()).thenReturn("meryamama@gmail.com");
+
+
         when(userRepository.findByEmail("meryamama@gmail.com")).thenReturn(fakeDriver);
+
+
         when(adRepository.save(fakeAd)).thenReturn(fakeAd);
+
+
         when(adMapper.toDto(fakeAd)).thenReturn(responseDto);
 
-        // Call method
+
+        // Call method createAd
+
         AdDto result = adService.createAd(inputDto);
+        System.out.println("result: " + result);
+
+        //  Check if result is null
+        if (result == null) {
+            System.out.println(" result is null");
+
+
+
+                verify(adMapper).toEntity(inputDto);
+
+
+
+                verify(securityContext).getAuthentication();
+
+
+                verify(authentication).getName();
+
+
+
+                verify(userRepository).findByEmail("meryamama@gmail.com");
+                System.out.println("userRepository.findByEmail was called");
+
+
+                verify(adRepository).save(fakeAd);
+
+
+
+                verify(adMapper).toDto(fakeAd);
+
+        }
 
         // Verify output
-        assertNotNull(result);
+        assertNotNull(result, "not  null");
         assertEquals("meknes", result.getDestination());
 
         // Verify interactions
@@ -86,5 +131,4 @@ class AdServiceTest {
         verify(adRepository).save(fakeAd);
         verify(adMapper).toDto(fakeAd);
     }
-
 }
