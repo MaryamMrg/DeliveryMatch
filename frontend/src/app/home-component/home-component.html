@@ -6,13 +6,13 @@
             <div class="col-lg-8">
               <h1 class="display-4 mb-4">Welcome to DeliveryMatch</h1>
               <p class="lead mb-4">Fast, reliable package delivery at your fingertips</p>
-              <button mat-raised-button color="primary" class="hero-btn me-3" >
+              <button mat-raised-button color="primary" class="hero-btn me-3" (click)="onSendPack()">
                 <mat-icon class="me-2">send</mat-icon>
                 Send Package
               </button>
-              <button mat-stroked-button color="primary" class="hero-btn">
+              <button  mat-stroked-button color="primary" class="hero-btn"  (click)="onAddAnnounce()" >
                 <mat-icon class="me-2">local_shipping</mat-icon>
-                Become Driver
+                add an Annouce
               </button>
             </div>
           </div>

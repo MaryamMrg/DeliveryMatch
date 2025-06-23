@@ -53,17 +53,17 @@
             
             <!-- Transportation Type Field -->
             <mat-form-field appearance="outline" class="w-100 mb-3">
-              <mat-label>Transportation Type</mat-label>
+              <mat-label>Marchandise Type</mat-label>
               <mat-select 
                 formControlName="m_type"
                 [class.is-invalid]="m_type?.invalid && m_type?.touched">
-                <mat-option value="bus">Bus</mat-option>
-                <mat-option value="car">Car</mat-option>
-                <mat-option value="van">Van</mat-option>
-                <mat-option value="truck">Truck</mat-option>
-                <mat-option value="motorcycle">Motorcycle</mat-option>
+                <mat-option value="SmallPAck">Small Pack</mat-option>
+                <mat-option value="document">Document</mat-option>
+                <mat-option value="gift">Gift</mat-option>
+                <mat-option value="elecronics">Electronic Equipment</mat-option>
+                <mat-option value="product">Procuct</mat-option>
               </mat-select>
-              <mat-icon matSuffix>directions_car</mat-icon>
+              <mat-icon matSuffix>shopping_basket</mat-icon>
               <mat-error *ngIf="m_type?.invalid && m_type?.touched">
                 Transportation type is required
               </mat-error>

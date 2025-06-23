@@ -83,5 +83,14 @@ export class AuthService {
     localStorage.setItem('role', role);
   }
 
-  
+    isDriver(): boolean {
+    const user = this.getCurrentUser();
+    return user?.role === 'DRIVER';
+  }
+
+  isSender(): boolean {
+    const user = this.getCurrentUser();
+    return user?.role === 'SENDER';
+  }
+
 }

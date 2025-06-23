@@ -1,13 +1,14 @@
 .create-ad-card {
   max-width: 600px;
   margin: 0 auto;
+  margin-top: 40px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
 
 .create-ad-card mat-card-header {
   background-color: #f5f5f5;
-  margin: -24px -24px 24px -24px;
+  
   padding: 16px 24px;
   border-radius: 8px 8px 0 0;
 }
